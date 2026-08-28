@@ -68,9 +68,7 @@ honest outcome:
    real automation.** The patch is kept here for reference, but Gemini is the
    practical choice.
 
-2. **Dead Gemini model names.** `gemini-2.0-flash` / `gemini-2.5-flash` return
-   HTTP 404 in 2026. Use **`gemini-3.6-flash`** (verified: returns a valid tool
-   call, HTTP 200, and completes tasks).
+2. **Use `gemini-3.6-flash`** (verified: returns a valid tool call, HTTP 200, and completes tasks).
 
 3. **OpenRouter `:free` not usable.** Free variants don't support tool calling
    (HTTP 404). Skip it.
