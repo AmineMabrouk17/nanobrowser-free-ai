@@ -40,9 +40,9 @@ well in practice (details below) — don't waste time on them.
 
 | Provider | Model | Actually works? | Notes |
 |----------|-------|-----------------|-------|
-| **Gemini** | `gemini-3.6-flash` | ✅ Yes | Free, fast, sees screenshots, supports tool-calling. **Use this.** |
-| Groq | `openai/gpt-oss-20b` / `120b` | ❌ No (in practice) | Patch fixes the planner error, but models are too weak/slow to drive the Navigator reliably. |
-| Groq | `qwen/qwen3.8-27b` | ⚠️ Planning only | Returns valid JSON, but still inferior to Gemini for real navigation. |
+| **Gemini** | `gemini-3.6-flash` | ✅ Yes | Free, fast, sees screenshots, supports tool-calling. **Use this.** (Newer `gemini-3.7-flash` also exists; `gemini-flash-latest` alias works too.) |
+| Groq | `qwen/qwen3.8-27b` | ⚠️ Planning only | The model in Groq's free catalog on this key. Returns valid JSON but inferior to Gemini for real navigation. |
+| Groq | `openai/gpt-oss-20b` | ❌ No (in practice) | Still callable but not in the catalog; too weak/slow to drive the Navigator reliably. |
 | OpenRouter `:free` | any | ❌ No | Free variants don't support tool calling (HTTP 404). |
 
 ---
@@ -68,7 +68,7 @@ honest outcome:
    real automation.** The patch is kept here for reference, but Gemini is the
    practical choice.
 
-2. **Use `gemini-3.6-flash`** (verified: returns a valid tool call, HTTP 200, and completes tasks).
+2. **Use `gemini-3.6-flash`** (verified: returns a valid tool call, HTTP 200, and completes tasks). It's the current stable free Flash model and also the default free model in the Gemini app. A newer `gemini-3.7-flash` exists; `gemini-flash-latest` is a working alias. Free-tier caveats: ~15 requests/minute limit, and free-tier prompts may be used for model training — upgrade to a paid tier if that matters.
 
 3. **OpenRouter `:free` not usable.** Free variants don't support tool calling
    (HTTP 404). Skip it.
@@ -96,8 +96,10 @@ Gemini reads screenshots too, so it handles image-heavy or French/Arabic pages w
 
 ## Using Groq (experimental — not recommended)
 
-Groq is faster for raw text, but its free `gpt-oss` models **do not complete
-browser tasks reliably** (see above). If you still want to try:
+Groq is faster for raw text, but its free models **do not complete browser tasks
+reliably** (see above). The model currently in Groq's free catalog on this key is
+`qwen/qwen3.8-27b` (returns valid JSON); `openai/gpt-oss-20b` is still callable
+but is no longer listed in the catalog. If you still want to try:
 
 1. Free Groq key → https://console.groq.com/keys
 2. Build the patched extension:
@@ -112,8 +114,8 @@ browser tasks reliably** (see above). If you still want to try:
 3. Load unpacked: `chrome://extensions/` → Developer mode → Load unpacked → `dist/`.
    Disable the Web Store copy if both are present.
 4. Settings → Add Provider **Groq**, paste key, set:
-   - Planner → `openai/gpt-oss-20b` (or `qwen/qwen3.8-27b`)
-   - Navigator → `openai/gpt-oss-20b`
+   - Planner → `qwen/qwen3.8-27b`
+   - Navigator → `qwen/qwen3.8-27b`
    - Save.
 
 > Expect the agent to plan but fail or stall during navigation. For working
