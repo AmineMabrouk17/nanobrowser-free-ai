@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="Nanobrowser Free AI" width="360" />
+  <img src="assets/logo.svg" alt="Nanobrowser Free AI" width="120" />
 </p>
 
 <h1 align="center">Nanobrowser Free AI</h1>
